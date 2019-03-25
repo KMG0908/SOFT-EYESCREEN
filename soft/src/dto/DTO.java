@@ -5,13 +5,15 @@ public class DTO {
 	private String passwd;
 	private String name;
 	private int isStudent;
+	private int isConnect;
 	
-	public DTO(int id, String passwd, String name, int isStudent) {
+	public DTO(int id, String passwd, String name, int isStudent, int isConnect) {
 		super();
 		this.id = id;
 		this.passwd = passwd;
 		this.name = name;
 		this.isStudent = isStudent;
+		this.isConnect = isConnect;
 	}
 
 	public int getId() {
@@ -44,5 +46,13 @@ public class DTO {
 
 	public void setIsStudent(int isStudent) {
 		this.isStudent = isStudent;
+	}
+
+	public int getIsConnect() {
+		return isConnect;
+	}
+
+	public void setIsConnect(int isConnect) {
+		this.isConnect = isConnect;
 	}
 }

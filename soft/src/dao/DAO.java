@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import db.DBConnection;
+import dto.DTO;
 
 public class DAO {
 	StringBuffer sb = new StringBuffer();
@@ -84,5 +86,59 @@ public class DAO {
 		}
 		
 		return name;
+	}
+	
+	public void connect(int id) {
+		sb.setLength(0);
+		sb.append("update user set isConnect = 1 ");
+		sb.append("where id = ? ");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, id);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void disconnect(int id) {
+		sb.setLength(0);
+		sb.append("update user set isConnect = 0 ");
+		sb.append("where id = ? ");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, id);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<Integer> getConnect() {
+		sb.setLength(0);
+		sb.append("select id from user ");
+		sb.append("where isConnect = 1 ");
+		
+		ArrayList<Integer> list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(rs.getInt("id"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 }

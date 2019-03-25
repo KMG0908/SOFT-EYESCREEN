@@ -43,7 +43,8 @@ public class Setting {
 			createTable.append("(id int not null primary key, ");
 			createTable.append("passwd varchar(30) not null, ");
 			createTable.append("name varchar(20) not null, ");
-			createTable.append("isStudent tinyint not null) ");
+			createTable.append("isStudent tinyint not null, ");
+			createTable.append("isConnect tinyint not null) ");
 			
 			stmt.executeUpdate(createTable.toString());
 			
@@ -52,7 +53,7 @@ public class Setting {
 			System.out.println("table create completed");
 			
 			StringBuffer insertData = new StringBuffer();
-			insertData.append("insert into user values(?, ?, ?, ?) ");
+			insertData.append("insert into user values(?, ?, ?, ?, ?) ");
 			PreparedStatement pstmt = conn.prepareStatement(insertData.toString());
 			
 			File file = new File("src/txt/user.txt");
@@ -80,6 +81,7 @@ public class Setting {
 					pstmt.setString(2, strArray[1]);
 					pstmt.setString(3, strArray[2]);
 					pstmt.setInt(4, Integer.parseInt(strArray[3]));
+					pstmt.setInt(5, Integer.parseInt(strArray[4]));
 					
 					pstmt.executeUpdate();
 				}
@@ -104,7 +106,7 @@ public class Setting {
 				stmt.executeUpdate("drop user 'softUser'@'localhost'");
 			}
 			stmt.executeUpdate("create user 'softUser'@'localhost' identified by '1234'");
-			stmt.executeUpdate("grant select on softDB.* to 'softUser'@'localhost'");
+			stmt.executeUpdate("grant select, update on softDB.* to 'softUser'@'localhost'");
 			
 			System.out.println("권한 생성 완료");
 		} catch (ClassNotFoundException e) {

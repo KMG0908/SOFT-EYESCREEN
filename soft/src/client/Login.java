@@ -54,7 +54,7 @@ public class Login extends JFrame implements ActionListener, KeyListener, MouseL
     	  //System.out.println("파일을 불러오지 못함");
       }
       
-      JLayeredPane layeredpane =new JLayeredPane();
+      JLayeredPane layeredpane = new JLayeredPane();
       layeredpane.setBounds(0, 0, 1350, 850);
       layeredpane.setLayout(null);
       
@@ -97,6 +97,8 @@ public class Login extends JFrame implements ActionListener, KeyListener, MouseL
       
       add(layeredpane);
       setVisible(true);
+      
+      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    }
 
    class Mypanel extends JPanel{
@@ -130,8 +132,23 @@ public class Login extends JFrame implements ActionListener, KeyListener, MouseL
 			   
 			   DAO dao = new DAO();
 			   if(dao.isExist(id, passwd)) {
-				   if(dao.getIsStudent(id) == 0) System.out.println("강사 로그인");
-				   else if(dao.getIsStudent(id) == 1) System.out.println("학생 로그인");
+				   if(dao.getIsStudent(id) == 0) {
+					   System.out.println("강사 로그인");
+					   try {
+						   new Teacher();
+					   } catch (Exception e) {
+						   // TODO Auto-generated catch block
+						   e.printStackTrace();
+					   }
+					   this.setVisible(false);
+					   
+				   }
+				   else if(dao.getIsStudent(id) == 1) {
+					   System.out.println("학생 로그인");
+					   dao.connect(id);
+					   new Student();
+					   this.setVisible(false);
+				   }
 				   else System.out.println("예상치 못한 오류");
 			   }
 			   else {
@@ -162,7 +179,6 @@ public class Login extends JFrame implements ActionListener, KeyListener, MouseL
    @Override
    public void keyReleased(KeyEvent e) {
 	   // TODO Auto-generated method stub
-	   
 	   
    }
 	
