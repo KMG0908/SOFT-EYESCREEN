@@ -8,7 +8,7 @@ import java.io.*;
 */
 public class DatagramBroadcast {
 	public static String Ipconfig ()throws Exception{
-	      String IP_ADDRESS=null;
+	      String IP_ADDRESS="192.168.0.255";
 	      InetAddress ipAddress=null;
 	      ipAddress = InetAddress.getLocalHost() ;
 	        
@@ -21,7 +21,7 @@ public class DatagramBroadcast {
 	        for(int i=0 ;i<3;i++){
 	           temp[i]= st.nextToken();
 	        }
-	        IP_ADDRESS=temp[0]+"."+temp[1]+"."+temp[2]+"."+"255";
+	        //IP_ADDRESS=temp[0]+"."+temp[1]+"."+temp[2]+"."+"255";
 	        System.out.println(IP_ADDRESS);
 	      return IP_ADDRESS;
 	   }

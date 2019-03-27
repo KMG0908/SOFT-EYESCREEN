@@ -77,7 +77,7 @@ public  class imageReceiver extends Thread implements KeyListener {
          frame.setVisible(false);
       }
       frame.getContentPane().add(labelImage);
-      frame.setSize(1200,500);
+      frame.setSize(976, 578);
       frame.setVisible(true);
       frame.addKeyListener(this);
       
@@ -85,6 +85,8 @@ public  class imageReceiver extends Thread implements KeyListener {
       frame.getContentPane().add(windowImage);
       frame.addKeyListener(this);
       /////////////////////////////
+      
+      frame.setLocation(500, 200);
       
       /* Construct full screen window */
       fullscreenWindow = new JWindow();
@@ -184,20 +186,20 @@ public  class imageReceiver extends Thread implements KeyListener {
             if (slicesStored == slices) {
                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                BufferedImage image = ImageIO.read(bis);
-//               labelImage.setBounds(0, 0, frame.getWidth(), frame.getHeight());
-//               windowImage.setBounds(0, 0, frame.getWidth(), frame.getHeight());
-//               labelImage.setSize(frame.getWidth(), frame.getHeight());
-//               windowImage.setSize(frame.getWidth(), frame.getHeight());
+               labelImage.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+               windowImage.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+               labelImage.setSize(frame.getWidth(), frame.getHeight());
+               windowImage.setSize(frame.getWidth(), frame.getHeight());
    
-               frame.getGraphics().drawImage(image, 0, 0, frame.getWidth(), frame.getHeight(), null);
+               //frame.getGraphics().drawImage(image, 0, 0, frame.getWidth(), frame.getHeight(), null);
                //내가 원하는 크기로!화질이 icon보다 아주 조금 안좋다.(왜냐면 내가 원하는 해상도에 맞추려다보니..)
                
-               //ImageIcon ii=new ImageIcon(image);
+               ImageIcon ii=new ImageIcon(image);
                
-//               labelImage.setIcon(ii);
-//               windowImage.setIcon(ii);
+               labelImage.setIcon(ii);
+               windowImage.setIcon(ii);
 
-               //frame.pack();
+               frame.pack();
             }
 
             if (debug) {
